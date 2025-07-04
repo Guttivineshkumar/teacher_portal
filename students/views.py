@@ -39,7 +39,8 @@ def add_student(request):
         st_marks = request.POST["marks"]
         exists = Student.objects.filter(subject=st_subject, name=st_name)
         if exists.exists():
-            exists.update(score=int(st_marks))
+            update_marks = int(exists[0].score) + int(st_marks)
+            exists.update(score=update_marks)
             messages.success(
                 request,
                 "Already student existed with subject updated the marks successfully",
